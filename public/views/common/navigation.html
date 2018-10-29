@@ -17,16 +17,40 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    IN+
                 </div>
-
             </li>
-
             <li ui-sref-active="active">
-                <a ui-sref="index.main"><i class="fa fa-laptop"></i> <span class="nav-label">Main page</span> </a>
+                <a ui-sref="index.main"><i class="fa fa-desktop"></i> <span class="nav-label">Main page</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="index.dashboard"><i class="fa fa-desktop"></i> <span class="nav-label">Trabajadores</span> </a>
+                <ul class="nav nav-second-level">
+                  <li> <a ui-sref="index.dashboard">Interno <span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level">
+                          <li> <a ui-sref="index.dashboard">Mantención</a> </li>
+                          <li> <a ui-sref="index.dashboard">Caja</a> </li>
+                          <li> <a ui-sref="index.dashboard">Resumen</a> </li>
+                          <li> <a ui-sref="index.dashboard">Reporte</a> </li>
+                          <li> <a ui-sref="index.dashboard">Revisar liquidaciones </a> </li>
+                      </ul>
+                  </li>
+                  <li> <a ui-sref="index.dashboard">Mano de Obra <span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level">
+                          <li> <a>Mantención</a> </li>
+                          <li> <a ui-sref="index.dashboard">Caja</a> </li>
+                          <li> <a ui-sref="index.dashboard">Resumen</a> </li>
+                          <li> <a ui-sref="index.dashboard">Reporte</a> </li>
+                          <li> <a ui-sref="index.dashboard">Revisar liquidaciones </a> </li>
+                          <li> <a ui-sref="index.dashboard"> Ingresar gastos </a> </li>
+                      </ul>
+                  </li>
+              </ul>
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="index.minor"><i class="fa fa-desktop"></i> <span class="nav-label">Minor page</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="index.mayor"><i class="fa fa-desktop"></i> <span class="nav-label">Mayor page</span></a>
             </li>
         </ul>
 
