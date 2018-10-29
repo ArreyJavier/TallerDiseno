@@ -30,17 +30,22 @@
          .state('index.main', {
              url: "/main",
              templateUrl: "/views/main.html",
-             data: { pageTitle: 'Example view' }
+             data: { pageTitle: 'Inicio' }
          })
-         .state('index.minor', {
-             url: "/minor",
-             templateUrl: "/views/minor.html",
-             data: { pageTitle: 'Example view' }
+         .state('index.obra', {
+             url: "/obra",
+             templateUrl: "/views/obra.html",
+             data: { pageTitle: 'Obras' }
          })
-         .state('index.mayor', {
-             url: "/mayor",
-             templateUrl: "/views/mayor.html",
-             data: { pageTitle: 'Example view' }
+         .state('index.cliente', {
+             url: "/cliente",
+             templateUrl: "/views/cliente.html",
+             data: { pageTitle: 'Clientes' }
+         })
+         .state('index.egreso', {
+             url: "/egreso",
+             templateUrl: "/views/egreso.html",
+             data: { pageTitle: 'Egresos' }
          })
  }
  angular
