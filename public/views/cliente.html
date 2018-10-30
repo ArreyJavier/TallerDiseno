@@ -1,11 +1,44 @@
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Clientes</h2>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
     <div class="row">
         <div class="col-lg-12">
-            <div class="text-center m-t-lg">
-                <h1>
-                    Clientes
-                </h1>
-                <small>Ubicación: public/views/cliente.html</small>
+            <div class="ibox">
+                <div class="ibox-content">
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                        <thead>
+                        <tr>
+                            <th>Cliente
+                            <th class="text-right">Acción
+                        <tbody>
+                        <tr>
+                            <td>Cliente 1
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button ui-sref="index.gastosCliente" class="btn-white btn btn-xs">Ver gastos</button>
+                                </div>
+                        <tr>
+                            <td>Cliente 2
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button class="btn-white btn btn-xs">Ver gastos</button>
+                                </div>
+                        <tr>
+                            <td>Cliente 3
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button class="btn-white btn btn-xs">Ver gastos</button>
+                                </div>
+                        <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <ul class="pagination pull-right"></ul>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

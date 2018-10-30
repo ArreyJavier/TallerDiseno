@@ -47,6 +47,16 @@
              templateUrl: "/views/egreso.html",
              data: { pageTitle: 'Egresos' }
          })
+         .state('index.ingreso', {
+             url: "/ingreso",
+             templateUrl: "/views/ingreso.html",
+             data: { pageTitle: 'Ingresos' }
+         })
+         .state('index.gastosCliente', {
+             url: "/gastosCliente",
+             templateUrl: "/views/gastosCliente.html",
+             data: { pageTitle: 'Gastos del Cliente' }
+         })
  }
  angular
      .module('inspinia')
