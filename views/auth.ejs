@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Miosense</title>
+    <title>Scarella & Scarella</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
-    <script src="javascripts/auth.js"></script>
   </head>
-  <script src="https://cdn.firebase.com/libs/firebaseui/3.4.0/firebaseui.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.4.0/firebaseui.css" />
-  <body>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-12 center">
-          <div id="firebaseui-auth-container"></div>
+  <body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+      <h1 class="logo-name">SS+</h1>
+      <h3>Bienvenido al sistema de gestión</h3>
+      <p>Login</p>
+      <div class="m-t" role="form" action="#">
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Email" required="" id="txtEmail">
         </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" required="" id="txtPassword">
+        </div>
+        <button class="btn btn-primary block full-width m-b" id="btnLogin">Login</button>
       </div>
     </div>
-
   </body>
+  <script src="javascripts/auth.js"></script>
 </html>

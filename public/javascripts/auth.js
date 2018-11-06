@@ -8,18 +8,22 @@ var config = {
 };
 firebase.initializeApp(config);
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
+
+const txtEmail = document.getElementById('txtEmail');
+const txtPassword = document.getElementById('txtPassword');
+
+document.getElementById('btnLogin').addEventListener("click", e => {
+  const email = txtEmail.value;
+  const pass = txtPassword.value;
+  const auth = firebase.auth();
+  const promise = auth.signInWithEmailAndPassword(email,pass);
+  promise.catch(e => console.log(e.message));
+});
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+  if(firebaseUser){
     window.location.href = "index";
   } else {
-    var uiConfig = {
-      credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-      signInSuccessUrl: 'index',
-      signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      ],
-    };
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start('#firebaseui-auth-container', uiConfig);
+    console.log('not logged in');
   }
 });
