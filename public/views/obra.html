@@ -1,4 +1,5 @@
 <div class="row wrapper border-bottom white-bg page-heading">
+    <script src="javascripts/obra.js" />
     <div class="col-lg-10">
         <h2>Obras</h2>
     </div>
@@ -10,66 +11,46 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label class="control-label" for="oClient">Cliente</label>
-                    <input type="text" id="oClient" name="oClient" value="" placeholder="Buscar por cliente" class="form-control"> </div>
+                    <input type="text" id="oClient" name="oClient" value="" placeholder="Buscar por cliente" class="form-control"> 
+                </div>
             </div>
         </div>
     </div>
+    <div class="ibox-content m-b-sm border-bottom">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label" for="product_name">Crear obra</label>
+                        <input type="text" id="obra-input" name="obra-input"  value="" placeholder="Obra" class="form-control">
+                        <input type="text" id="descripcion-input" name="descripcion-input"  value="" placeholder="Descripcion" class="form-control">
+                        <input type="text" id="cliente-input" name="cliente-input" value="" placeholder="Cliente" class="form-control">
+                        <input type="date" id="fechaIni-input" name="fechaIni-input"  value="" placeholder="fechaIni" class="form-control">
+                        <input type="date" id="fechaFin-input" name="fechaFin-input"  value="" placeholder="fechaFin" class="form-control">
+                        <button onclick="addObra()" class="btn-primary btn btn-xs">Crear</button>
+                        <div id="created_successfully">
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
-                <div class="ibox-content">
+                <div class="ibox-content">                        
+                <label class="control-label" for="show_product_name">Obras</label>
                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
-                        <thead>
-                        <tr>
-                            <th>Obra
-                            <th>Descripción
-                            <th>Cliente
-                            <th class="text-right" data-sort-ignore="true">Acción
-                        <tbody>
-                        <tr>
-                            <td> Obra 1
-                            <td> Descripción de la obra 1
-                            <td> Cliente de obra 1
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Obra 2
-                            <td> Descripción de la obra 2
-                            <td> Cliente de obra 2
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Obra 3
-                            <td> Descripción de la obra 3
-                            <td> Cliente de obra 3
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Obra 4
-                            <td> Descripción de la obra 4
-                            <td> Cliente de obra 4
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Obra 5
-                            <td> Descripción de la obra 5
-                            <td> Cliente de obra 5
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tfoot>
-                        <tr>
-                            <td colspan="6">
-                                <ul class="pagination pull-right"></ul>
+                        <thead id="obras">
+
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6 ">
+                                            <div id="updated_successfully">
+
+                                                </div>
+                                        <ul class="pagination pull-right"></ul>    
+                            </tfoot>
                     </table>
                 </div>
             </div>

@@ -41,13 +41,18 @@ function addEgreso(){
 }
 
 function deleteEgreso(index){
+<<<<<<< HEAD:public/javascripts/egreso.js
     egresos.splice(index, 1); 
     renderEgresos(egresos);
+=======
+    egresos.splice(index, 1);
+    renderEgresos();
+>>>>>>> f383d9e233a54da1153f3da7dc66e6f597120419:public/javascripts/egreso.js
 }
 
 function appendEgreso(egreso, index){
     document.getElementById('egresos').innerHTML += `
-                        <tr id="egreso${index}">   
+                        <tr id="egreso${index}">
                             <td> ${egreso.egreso} </td>
                             <td> ${egreso.concepto} </td>
                             <td class="text-right">
