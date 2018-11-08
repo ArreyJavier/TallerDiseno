@@ -19,68 +19,88 @@ firebase.initializeApp(config);
 
 var rootRef 		= firebase.database().ref();
 var internosRef 	= rootRef.child("Trabajadores/Internos");
-
-var internosFirebase = []
+var internos 		= [];
 
 internosRef.once('value').then(function(snapshot) {
 	snapshot.forEach(function(internoSnapshot) {
 
 		var trabajadorInterno 	= internoSnapshot.val();
 		tmpInterno 				= {}
-		tmpInterno['interno'] 	= trabajadorInterno.nombre;
+		tmpInterno['key'] 		= trabajadorInterno.key;
+		tmpInterno['nombre'] 	= trabajadorInterno.nombre;
 		tmpInterno['cedula'] 	= trabajadorInterno.cedula;
 
-		internosFirebase.push(tmpInterno);
+		internos.push(tmpInterno);
 	});
+	renderInternos();
 });
 
-console.log(internosFirebase);
-
-var internos = [
-	{
-		"interno": "Juan Gomez Mansilla",
-		"cedula": "18536753-3"
-	},
-	{
-		"interno": "Ignacio Rosas García",
-		"cedula": "18548032-1"
-	},
-	{
-		"interno": "Gustavo Gatica Soto",
-		"cedula": "16345940-K"
-	},
-];
-console.log(internos)
 
 function addInterno(){
 	interno = {
-		"interno": "",
+		"nombre": "",
 		"cedula": ""
 	};
-	interno.interno = document.getElementById("interno-input").value
-	interno.cedula = document.getElementById("cedula-input").value
+	interno.nombre 	= document.getElementById("interno-input").value
+	interno.cedula 	= document.getElementById("cedula-input").value
 
-	document.getElementById("interno-input").value = '';
-	document.getElementById("cedula-input").value = '';
+	if ( (interno.nombre == "") || (interno.cedula == "") ) {
+		alert("Todos los campos deben ser rellenados.");
+		return false;
+	}
+	else{
+		document.getElementById("interno-input").value 	= '';
+		document.getElementById("cedula-input").value 	= '';
 
-	internos.push(interno);
+		var newInternoKey = internosRef.push().key;
+		
+		newInterno = {
+			'key'		: newInternoKey,
+			'cedula' 	: interno.cedula,
+			'nombre'	: interno.nombre 
+		}
+		internosRef.child(newInternoKey).update(newInterno);
+		interno.key = newInternoKey;
+		internos.push(interno);
+		console.log(internos);
+
+		document.getElementById('created_successfully').innerHTML += `
+		<div class="alert alert-success" role="alert">
+			Se agregaron exitosamente los datos.
+		</div>
+		`;
+		var fade_out = function() {
+			$("#created_successfully").fadeOut().empty();
+		}
+		setTimeout(fade_out, 5000);
+
+	}
 	renderInternos();
 }
 
 function deleteInterno(index){
-	internos.splice(index, 1);
+	var result = confirm("¿Desea borrar este trabajador?");
+	if (result) {
+		console.log(internos[index]['key']);
+		console.log(internos[index]['cedula']);
+		deleteRef = internosRef.child(internos[index]['key'])
+
+		deleteRef.remove();
+		internos.splice(index, 1);
+	}
 	renderInternos();
 }
+
 
 function appendInterno(interno, index){
 	document.getElementById('internos').innerHTML += `
 						<tr id="interno${index}">
-							<td> ${interno.interno} </td>
+							<td> ${interno.nombre} </td>
 							<td> ${interno.cedula} </td>
 							<td class="text-right">
 								<div class="btn-group">
-									<button onclick="initEditinterno(${index})" class="btn-white btn btn-xs">Editar</button>
-									<button onclick="deleteinterno(${index})" class="btn-danger btn btn-xs">Delete</button>
+									<button onclick="initEditInterno(${index})" class="btn-white btn btn-xs">Editar</button>
+									<button onclick="deleteInterno(${index})" class="btn-danger btn btn-xs">Delete</button>
 								</div>
 							</td>
 						</tr>`;
@@ -89,7 +109,7 @@ function appendInterno(interno, index){
 function initEditInterno(index){
 	document.getElementById(`interno${index}`).innerHTML = `
 						<tr id="interno${index}">
-						<td><input type="text" id="interno-field" value="${internos[index].interno}" class="form-control"></td>
+						<td><input type="text" id="interno-field" value="${internos[index].nombre}" class="form-control"></td>
 						<td><input type="text" id="cedula-field" value="${internos[index].cedula}" class="form-control"></td>
 							<td class="text-right">
 								<div class="btn-group">
@@ -100,9 +120,40 @@ function initEditInterno(index){
 
 }
 function executeEditInterno(index){
-	internos[index] = {
-		"interno": document.getElementById("interno-field").value,
-		"cedula": document.getElementById("cedula-field").value
+	console.log("AA")
+	interno = {
+		"nombre" 	: document.getElementById("interno-field").value,
+		"cedula" 	: document.getElementById("cedula-field").value
+	}
+
+	if ((interno.nombre == "") || (interno.cedula == "")) {
+		alert("Todos los campos deben ser rellenados.");
+		return false;
+	}
+	else {
+			console.log("AA")
+		internos[index] = {
+			"key" 		: internos[index].key,
+			"nombre" 	: document.getElementById("interno-field").value,
+			"cedula" 	: document.getElementById("cedula-field").value
+		}
+		console.log("AA")
+		console.log(internos[index]);
+		internosRef.child(internos[index].key).update({
+			'key' 		: internos[index].key,
+			'nombre' 	: interno.nombre,
+			'cedula' 	: interno.cedula
+		})
+		document.getElementById('updated_successfully').innerHTML += `
+		<div class="alert alert-success" role="alert">
+			Actualización exitosa de los datos.
+		</div>
+		`;
+		var fade_out = function() {
+		$("#updated_successfully").fadeOut().empty();
+		}
+		setTimeout(fade_out, 5000); 
+
 	}
 	renderInternos();
 }
