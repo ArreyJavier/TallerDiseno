@@ -52,8 +52,7 @@ dbObras.on("child_changed", function(snapshot){
 dbObras.on("child_removed", function(snapshot){
     var data = snapshot.val();
     var obrasList = obras.length;
-    for (i = 0; i < obrasList - 1; i++) {
-        console.log(obras[i].obra)
+    for (i = 0; i < obrasList; i++) {
         if (obras[i].key == data.key) {
             obraDb = {
                 "key" : data.key,
@@ -83,45 +82,54 @@ function addObra(){
     obra.fechaIni = document.getElementById("fechaIni-input").value
     obra.fechaFin = document.getElementById("fechaFin-input").value
 
-    document.getElementById("obra-input").value = '';
-    document.getElementById("descripcion-input").value = '';
-    document.getElementById("cliente-input").value = '';
-    document.getElementById("fechaIni-input").value = '';
-    document.getElementById("fechaFin-input").value = '';
-
-    var addRef = firebase.database().ref().child('Obras/')
-
-    var newObraKey = addRef.push().key;
-    console.log
-
-    var obrasListLength = obras.length;
-    console.log("list" + obrasListLength)
-
-   updates = {
-    key : newObraKey,
-    obra: obra.obra,
-    descripcion: obra.descripcion,
-    cliente: obra.cliente,
-    fechaIni: obra.fechaIni,
-    fechaFin: obra.fechaFin
+    if ((obra.obra == "") || (obra.descripcion == "") || (obra.cliente == "")  || !Date.parse(obra.fechaIni) || !Date.parse(obra.fechaFin)) {
+        alert("Todos los campos deben ser rellenados.");
+        return false;
     }
+    else {
+        document.getElementById("obra-input").value = '';
+        document.getElementById("descripcion-input").value = '';
+        document.getElementById("cliente-input").value = '';
+        document.getElementById("fechaIni-input").value = '';
+        document.getElementById("fechaFin-input").value = '';
 
-    addRef.child(newObraKey).update(updates)
+        var addRef = firebase.database().ref().child('Obras/');
+        var newObraKey = addRef.push().key;
+
+    updates = {
+        key : newObraKey,
+        obra: obra.obra,
+        descripcion: obra.descripcion,
+        cliente: obra.cliente,
+        fechaIni: obra.fechaIni,
+        fechaFin: obra.fechaFin
+        }
+        addRef.child(newObraKey).update(updates);
+        document.getElementById('created_successfully').innerHTML += `
+        <div class="alert alert-success" role="alert">
+        Agregó exitosamente los datos.
+            </div>
+        `;
+        var fade_out = function() {
+            $("#created_successfully").fadeOut().empty();
+          }
+          setTimeout(fade_out, 5000);
+    }
 
     renderObras();
 }
 
 
 function deleteObra(index){
-    var result = confirm("Want to delete?");
+    var result = confirm("Quieres borrar?");
     if (result) {
     //Logic to delete the item
     var adaRef = firebase.database().ref('Obras/'+obras[index].key);
     obras.splice(index, 1);
     adaRef.remove().then(function() {
-        console.log("Remove succeeded.")
+        console.log("Exito borrar.")
     }).catch(function(error) {
-        console.log("Remove failed: " + error.message)
+        console.log("No podría borrar: " + error.message)
   });
     }
     renderObras();
@@ -162,14 +170,6 @@ function initEditObra(index){
 
 }
 function executeEditObra(index){
-    obras[index] = {
-        "key" : obras[index].key,
-        "obra": document.getElementById("obra-field").value,
-        "descripcion": document.getElementById("descripcion-field").value,
-        "cliente": document.getElementById("cliente-field").value,
-        "fechaIni": document.getElementById("fechaIni-field").value,
-        "fechaFin": document.getElementById("fechaFin-field").value
-    }
     obra = {
         "obra": "",
         "descripcion": "",
@@ -183,16 +183,40 @@ function executeEditObra(index){
     obra.fechaIni = document.getElementById("fechaIni-field").value
     obra.fechaFin = document.getElementById("fechaFin-field").value
 
-    var ObrasDb = firebase.database().ref("Obras/");
-    ObrasDb.child(obras[index].key).update({
-        key : obras[index].key,
-        obra: obra.obra,
-        descripcion: obra.descripcion,
-        cliente: obra.cliente,
-        fechaIni: obra.fechaIni,
-        fechaFin: obra.fechaFin
-    }) 
+    if ((obra.obra == "") || (obra.descripcion == "") || (obra.cliente == "")  || !Date.parse(obra.fechaIni) || !Date.parse(obra.fechaFin)) {
+        alert("Todos los campos deben ser rellenados.");
+        return false;
+    }
+    else {
+        obras[index] = {
+            "key" : obras[index].key,
+            "obra": document.getElementById("obra-field").value,
+            "descripcion": document.getElementById("descripcion-field").value,
+            "cliente": document.getElementById("cliente-field").value,
+            "fechaIni": document.getElementById("fechaIni-field").value,
+            "fechaFin": document.getElementById("fechaFin-field").value
+        }
+       
+        var ObrasDb = firebase.database().ref("Obras/");
+        ObrasDb.child(obras[index].key).update({
+            key : obras[index].key,
+            obra: obra.obra,
+            descripcion: obra.descripcion,
+            cliente: obra.cliente,
+            fechaIni: obra.fechaIni,
+            fechaFin: obra.fechaFin
+        })
+        document.getElementById('updated_successfully').innerHTML += `
+        <div class="alert alert-success" role="alert">
+        Actualización exitosa de los datos.
+            </div>
+        `;
+        var fade_out = function() {
+            $("#updated_successfully").fadeOut().empty();
+          }
+          setTimeout(fade_out, 5000); 
 
+    }
 
     renderObras();
 }
