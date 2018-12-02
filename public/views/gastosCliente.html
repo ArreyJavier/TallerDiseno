@@ -6,68 +6,39 @@
     </div>
     <div class="col-lg-2"> </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" >Nuevo Gasto</label>
+                    <input type="text" id="obraGasto" name="obraGasto"  value="" placeholder="Obra" class="form-control">
+                    <input type="text" id="descripcionGasto" name="descripcionGasto"  value="" placeholder="Descripción" class="form-control">
+                    <input type="text" id="montoGasto" name="montoGasto"  value="" placeholder="Monto" class="form-control">
+                    <button onclick="addGasto()" class="btn-primary btn btn-xs">Crear</button>
+                    <div id="created_successfully">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5> Visualización de gastos de clientes</h5>
-                    <div ibox-tools> </div>
-                </div>
+            <div class="ibox">
                 <div class="ibox-content">
-                    <div class="col-lg-12">
-                        <div class="col-lg-2">
-                            <input type="text" class="form-control input-sm" id="filterO" placeholder="Busca por obra"> </div>
-                        <div class="col-lg-2">
-                            <input type="text" class="form-control input-sm" id="filterF" placeholder="Busca por fecha"> </div>
-                    </div>
-                    <table class="footable table table-stripped" data-page-size="8" data-filter="#filter">
-                        <thead>
-                        <tr>
-                            <th>Descripción
-                            <th>Obra
-                            <th>Fecha
-                            <th>Precio
-                        <tbody>
-                        <tr>
-                            <td>Gasto 1
-                            <td>Obra de gasto 1
-                            <td>Fecha 1
-                            <td>Precio 1
-                        <tr>
-                            <td>Gasto 2
-                            <td>Obra de gasto 2
-                            <td>Fecha 2
-                            <td>Precio 2
-                        <tr>
-                            <td>Gasto 3
-                            <td>Obra de gasto 3
-                            <td>Fecha 3
-                            <td>Precio 3
-                        <tr>
-                            <td>Gasto 4
-                            <td>Obra de gasto 4
-                            <td>Fecha 4
-                            <td>Precio 4
-                        <tr>
-                            <td>Gasto 5
-                            <td>Obra de gasto 5
-                            <td>Fecha 5
-                            <td>Precio 5
-                        <tr>
-                            <td>Gasto 6
-                            <td>Obra de gasto 6
-                            <td>Fecha 6
-                            <td>Precio 6
-                        <tr>
-                            <td>Gasto 7
-                            <td>Obra de gasto 7
-                            <td>Fecha 7
-                            <td>Precio 7
+                    <label class="control-label" for="show_product_name">Gastos</label>
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                        <thead id="gastos">
+
+                        </thead>
                         <tfoot>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6 ">
+                                <div id="updated_successfully">
+
+                                </div>
                                 <ul class="pagination pull-right"></ul>
+                        </tfoot>
                     </table>
                 </div>
             </div>
