@@ -13,62 +13,24 @@ if (!firebase.apps.length) {
 
 var rootRef = firebase.database().ref();
 var dbObras = rootRef.child("Obras/");
-
 var obras = [];
- 
-dbObras.on("child_added", function(snapshot){
-  var data = snapshot.val();
-    obra = {
-        "key" : data.key,
-        "obra": data.obra,
-        "descripcion": data.descripcion,
-        "cliente" : data.cliente,
-        "fechaIni" : data.fechaIni,
-        "fechaFin" : data.fechaFin
-        };
-      obras.push(obra);
-   
-  renderObras();
+
+dbObras.once('value').then(function(snapshot) {
+    snapshot.forEach(function(obraSnapshot) {
+
+        var sObra 	= obraSnapshot.val();
+        tmpObras 				= {};
+        tmpObras['key'] 		= sObra.key;
+        tmpObras['obra'] 	    = sObra.obra;
+        tmpObras['descripcion'] = sObra.descripcion;
+        tmpObras['cliente'] 	= sObra.cliente;
+        tmpObras['fechaIni'] 	= sObra.fechaIni;
+        tmpObras['fechaFin'] 	= sObra.fechaFin;
+
+        obras.push(tmpObras);
+    });
+    renderObras();
 });
-
-dbObras.on("child_changed", function(snapshot){
-    var data = snapshot.val();
-    var obrasList = obras.length;
-    for (i = 0; i < obrasList; i++) {
-        if (obras[i].key == data.key) {
-            obraDb = {
-                "key" : data.key,
-                "obra": data.obra,
-                "descripcion": data.descripcion,
-                "cliente" : data.cliente,
-                "fechaIni" : data.fechaIni,
-                "fechaFin" : data.fechaFin
-                };
-            obras.splice(i,1);
-            obras.splice(i,0,obraDb);
-        }
-    }
-    renderObras();
-  });
-
-dbObras.on("child_removed", function(snapshot){
-    var data = snapshot.val();
-    var obrasList = obras.length;
-    for (i = 0; i < obrasList; i++) {
-        if (obras[i].key == data.key) {
-            obraDb = {
-                "key" : data.key,
-                "obra": data.obra,
-                "descripcion": data.descripcion,
-                "cliente" : data.cliente,
-                "fechaIni" : data.fechaIni,
-                "fechaFin" : data.fechaFin
-                };
-            obras.splice(i,1);
-        }
-    }
-    renderObras();
-  });
 
 function addObra(){
     obra = {
@@ -78,11 +40,11 @@ function addObra(){
         "fechaIni" : "",
         "fechaFin" : ""
     };
-    obra.obra = document.getElementById("obra-input").value
-    obra.descripcion = document.getElementById("descripcion-input").value
-    obra.cliente = document.getElementById("cliente-input").value
-    obra.fechaIni = document.getElementById("fechaIni-input").value
-    obra.fechaFin = document.getElementById("fechaFin-input").value
+    obra.obra = document.getElementById("obra-input").value;
+    obra.descripcion = document.getElementById("descripcion-input").value;
+    obra.cliente = document.getElementById("cliente-input").value;
+    obra.fechaIni = document.getElementById("fechaIni-input").value;
+    obra.fechaFin = document.getElementById("fechaFin-input").value;
 
     if ((obra.obra == "") || (obra.descripcion == "") || (obra.cliente == "")  || !Date.parse(obra.fechaIni) || !Date.parse(obra.fechaFin)) {
         alert("Todos los campos deben ser rellenados.");
@@ -95,18 +57,21 @@ function addObra(){
         document.getElementById("fechaIni-input").value = '';
         document.getElementById("fechaFin-input").value = '';
 
-        var addRef = firebase.database().ref().child('Obras/');
-        var newObraKey = addRef.push().key;
+        var newObraKey = dbObras.push().key;
 
     updates = {
-        key : newObraKey,
-        obra: obra.obra,
-        descripcion: obra.descripcion,
-        cliente: obra.cliente,
-        fechaIni: obra.fechaIni,
-        fechaFin: obra.fechaFin
-        }
-        addRef.child(newObraKey).update(updates);
+        'key' : newObraKey,
+        'obra': obra.obra,
+        'descripcion': obra.descripcion,
+        'cliente': obra.cliente,
+        'fechaIni': obra.fechaIni,
+        'fechaFin': obra.fechaFin
+        };
+        dbObras.child(newObraKey).update(updates);
+        obra.key = newObraKey;
+        obras.push(obra);
+
+
         document.getElementById('created_successfully').innerHTML += `
         <div class="alert alert-success" role="alert">
         Agregó exitosamente los datos.

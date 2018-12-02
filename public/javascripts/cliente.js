@@ -13,53 +13,23 @@ if (!firebase.apps.length) {
 
 var rootRef = firebase.database().ref();
 var dbClientes = rootRef.child("Clientes/");
-
 var clientes = [];
 
-dbClientes.on("child_added", function(snapshot){
-    var data = snapshot.val();
-    cliente = {
-        "key" : data.key,
-        "nombre": data.nombre,
-        "correo": data.correo
-    };
-    clientes.push(cliente);
 
+dbClientes.once('value').then(function(snapshot) {
+    snapshot.forEach(function(internoSnapshot) {
+
+        var client 	= internoSnapshot.val();
+        tmpClientes 				= {};
+        tmpClientes['key'] 		= client.key;
+        tmpClientes['nombre'] 	= client.nombre;
+        tmpClientes['correo'] 	= client.correo;
+
+        clientes.push(tmpClientes);
+    });
     renderClientes();
 });
 
-dbClientes.on("child_changed", function(snapshot){
-    var data = snapshot.val();
-    var clientesList = clientes.length;
-    for (i = 0; i < clientesList; i++) {
-        if (clientes[i].key == data.key) {
-            clienteDb = {
-                "key" : data.key,
-                "nombre": data.nombre,
-                "correo": data.correo,
-            };
-            clientes.splice(i,1);
-            clientes.splice(i,0,clienteDb);
-        }
-    }
-    renderClientes();
-});
-
-dbClientes.on("child_removed", function(snapshot){
-    var data = snapshot.val();
-    var clientesList = clientes.length;
-    for (i = 0; i < clientesList; i++) {
-        if (clientes[i].key == data.key) {
-            clienteDb = {
-                "key" : data.key,
-                "nombre": data.nombre,
-                "correo": data.correo
-            };
-            clientes.splice(i,1);
-        }
-    }
-    renderClientes();
-});
 
 function addCliente(){
     cliente = {
@@ -77,15 +47,18 @@ function addCliente(){
         document.getElementById("nombreC").value = '';
         document.getElementById("correoC").value = '';
 
-        var addRef = firebase.database().ref().child('Clientes/');
-        var newClienteKey = addRef.push().key;
+        var newClienteKey = dbClientes.push().key;
 
         updates = {
-            key : newClienteKey,
-            nombre: cliente.nombre,
-            correo: cliente.correo
+            'key' : newClienteKey,
+            'nombre': cliente.nombre,
+            'correo': cliente.correo
         };
-        addRef.child(newClienteKey).update(updates);
+        dbClientes.child(newClienteKey).update(updates);
+        cliente.key = newClienteKey;
+        clientes.push(cliente);
+        console.log(clientes);
+
         document.getElementById('created_successfully').innerHTML += `
         <div class="alert alert-success" role="alert">
         Agregó exitosamente los datos.
@@ -116,6 +89,11 @@ function deleteCliente(index){
     renderClientes();
 }
 
+function redirect(index){
+    localStorage.setItem("client", clientes[index].key);
+    location.href = "/index#/index/gastosCliente";
+}
+
 function appendCliente(cliente, index){
     document.getElementById('clientes').innerHTML += `
                         <tr id="cliente${index}">
@@ -123,6 +101,7 @@ function appendCliente(cliente, index){
                             <td> ${cliente.correo} </td>
                             <td class="text-right">
                                 <div class="btn-group">
+                                    <button onclick="redirect(${index})" class="btn-white btn btn-xs">Ver gastos</button>
                                     <button onclick="initEditCliente(${index})" class="btn-white btn btn-xs">Editar</button>
                                     <button onclick="deleteCliente(${index})" class="btn-danger btn btn-xs">Delete</button>
                                 </div>
@@ -133,8 +112,8 @@ function appendCliente(cliente, index){
 function initEditCliente(index){
     document.getElementById(`cliente${index}`).innerHTML = `
                         <tr id="cliente${index}">
-                        <td><input type="text" id="nombreC" value="${clientes[index].nombre}" class="form-control"></td>
-                        <td><input type="text" id="correoC" value="${clientes[index].correo}" class="form-control"></td>
+                        <td><input type="text" id="nombreC-field" value="${clientes[index].nombre}" class="form-control"></td>
+                        <td><input type="text" id="correoC-field" value="${clientes[index].correo}" class="form-control"></td>
                             <td class="text-right">
                                 <div class="btn-group">
                                     <button onclick="executeEditCliente(${index})" class="btn-primary btn btn-xs">Guardar</button>
@@ -146,11 +125,9 @@ function initEditCliente(index){
 }
 function executeEditCliente(index){
     cliente = {
-        "nombre": "",
-        "correo": "",
+        "nombre": document.getElementById("nombreC-field").value,
+        "correo": document.getElementById("correoC-field").value
     };
-    cliente.nombre = document.getElementById("nombreC").value;
-    cliente.correo = document.getElementById("correoC").value;
 
     if ((cliente.nombre == "") || (cliente.correo == "")) {
         alert("Todos los campos deben ser rellenados.");
@@ -159,15 +136,14 @@ function executeEditCliente(index){
     else {
         clientes[index] = {
             "key" : clientes[index].key,
-            "nombre": document.getElementById("nombreC").value,
-            "correo": document.getElementById("correoC").value,
+            "nombre": document.getElementById("nombreC-field").value,
+            "correo": document.getElementById("correoC-field").value,
         };
 
-        var ClientesDb = firebase.database().ref("Clientes/");
-        ClientesDb.child(clientes[index].key).update({
-            key : clientes[index].key,
-            nombre: cliente.nombre,
-            correo: cliente.correo,
+        dbClientes.child(clientes[index].key).update({
+            'key' : clientes[index].key,
+            'nombre': cliente.nombre,
+            'correo': cliente.correo,
         });
         document.getElementById('updated_successfully').innerHTML += `
         <div class="alert alert-success" role="alert">

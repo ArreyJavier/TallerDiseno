@@ -8,6 +8,9 @@ var config = {
 };
 firebase.initializeApp(config);
 
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
 
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
