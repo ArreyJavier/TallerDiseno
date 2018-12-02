@@ -1,42 +1,44 @@
 <div class="row wrapper border-bottom white-bg page-heading">
+    <script src="javascripts/cliente.js" />
     <div class="col-lg-10">
         <h2>Clientes</h2>
     </div>
     <div class="col-lg-2"> </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" >Crear Cliente</label>
+                    <input type="text" id="nombreC" name="nombreC"  value="" placeholder="Nombre" class="form-control">
+                    <input type="text" id="correoC" name="correoC"  value="" placeholder="Correo" class="form-control">
+                    <button onclick="addCliente()" class="btn-primary btn btn-xs">Crear</button>
+                    <div id="created_successfully">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-content">
+                    <label class="control-label" for="show_product_name">Clientes</label>
                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
-                        <thead>
-                        <tr>
-                            <th>Cliente
-                            <th class="text-right">Acción
-                        <tbody>
-                        <tr>
-                            <td>Cliente 1
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button ui-sref="index.gastosCliente" class="btn-white btn btn-xs">Ver gastos</button>
-                                </div>
-                        <tr>
-                            <td>Cliente 2
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Ver gastos</button>
-                                </div>
-                        <tr>
-                            <td>Cliente 3
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Ver gastos</button>
-                                </div>
+                        <thead id="clientes">
+
+                        </thead>
                         <tfoot>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6 ">
+                                <div id="updated_successfully">
+
+                                </div>
                                 <ul class="pagination pull-right"></ul>
+                        </tfoot>
                     </table>
                 </div>
             </div>

@@ -1,13 +1,15 @@
-/*
-* config van las credenciales para meterce a firebase
-* firebase.initiateApp(config) enchufa firebase al js
-* internosRef es la ruta de la tabla donde estoy guardando los trabajadores (ver link)
-* https://console.firebase.google.com/u/0/project/taller-diseno/database/taller-diseno/data
-* la funcion snapshot.foreach recorre los "child" de la tabla y le extraigo los datos
-* con esto deberiamos poder comenzar a conversar con la DB de forma mas fluida
-* notar que "internosFirebase", devuelve exactamente lo mismo que "internos" por consola, demostrando que funciona.
-*/
+var config = {
+    apiKey: "AIzaSyA0nnn3mnnUD8IeLOYV3qwhO2a46jQTHqg",
+    authDomain: "taller-diseno.firebaseapp.com",
+    databaseURL: "https://taller-diseno.firebaseio.com",
+    projectId: "taller-diseno",
+    storageBucket: "taller-diseno.appspot.com",
+    messagingSenderId: "629295465332"
+};
 
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
 
 function revisarDigito( dvr )
 {	
@@ -123,19 +125,6 @@ function Rut(texto)
 	return false;
 }
 
-
-
-
-var config = {
-	apiKey: "AIzaSyA0nnn3mnnUD8IeLOYV3qwhO2a46jQTHqg",
-	authDomain: "taller-diseno.firebaseapp.com",
-	databaseURL: "https://taller-diseno.firebaseio.com",
-	projectId: "taller-diseno",
-	storageBucket: "taller-diseno.appspot.com",
-	messagingSenderId: "629295465332"
-};
-firebase.initializeApp(config);
-
 var rootRef 		= firebase.database().ref();
 var internosRef 	= rootRef.child("Trabajadores/Internos");
 var internos 		= [];
@@ -144,7 +133,7 @@ internosRef.once('value').then(function(snapshot) {
 	snapshot.forEach(function(internoSnapshot) {
 
 		var trabajadorInterno 	= internoSnapshot.val();
-		tmpInterno 				= {}
+		tmpInterno 				= {};
 		tmpInterno['key'] 		= trabajadorInterno.key;
 		tmpInterno['nombre'] 	= trabajadorInterno.nombre;
 		tmpInterno['cedula'] 	= trabajadorInterno.cedula;
@@ -154,14 +143,13 @@ internosRef.once('value').then(function(snapshot) {
 	renderInternos();
 });
 
-
 function addInterno(){
 	interno = {
 		"nombre": "",
 		"cedula": ""
 	};
-	interno.nombre 	= document.getElementById("interno-input").value
-	interno.cedula 	= document.getElementById("cedula-input").value
+	interno.nombre 	= document.getElementById("interno-input").value;
+	interno.cedula 	= document.getElementById("cedula-input").value;
 
 	if ( (interno.nombre == "") || (interno.cedula == "") || (!Rut(interno.cedula)) ) {
 		alert("Debe ingresar un nombre y una cédula válida.");
@@ -177,7 +165,7 @@ function addInterno(){
 			'key'		: newInternoKey,
 			'cedula' 	: interno.cedula,
 			'nombre'	: interno.nombre 
-		}
+		};
 		internosRef.child(newInternoKey).update(newInterno);
 		interno.key = newInternoKey;
 		internos.push(interno);
@@ -190,7 +178,7 @@ function addInterno(){
 		`;
 		var fade_out = function() {
 			$("#created_successfully").fadeOut().empty();
-		}
+		};
 		setTimeout(fade_out, 5000);
 
 	}
@@ -239,30 +227,27 @@ function initEditInterno(index){
 
 }
 function executeEditInterno(index){
-	console.log("AA")
 	interno = {
 		"nombre" 	: document.getElementById("interno-field").value,
 		"cedula" 	: document.getElementById("cedula-field").value
-	}
+	};
 
 	if ((interno.nombre == "") || (interno.cedula == "")) {
 		alert("Todos los campos deben ser rellenados.");
 		return false;
 	}
 	else {
-			console.log("AA")
 		internos[index] = {
 			"key" 		: internos[index].key,
 			"nombre" 	: document.getElementById("interno-field").value,
 			"cedula" 	: document.getElementById("cedula-field").value
-		}
-		console.log("AA")
-		console.log(internos[index]);
+		};
+
 		internosRef.child(internos[index].key).update({
 			'key' 		: internos[index].key,
 			'nombre' 	: interno.nombre,
 			'cedula' 	: interno.cedula
-		})
+		});
 		document.getElementById('updated_successfully').innerHTML += `
 		<div class="alert alert-success" role="alert">
 			Actualización exitosa de los datos.
@@ -270,7 +255,7 @@ function executeEditInterno(index){
 		`;
 		var fade_out = function() {
 		$("#updated_successfully").fadeOut().empty();
-		}
+		};
 		setTimeout(fade_out, 5000); 
 
 	}
