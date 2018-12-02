@@ -1,13 +1,15 @@
-/*
-* config van las credenciales para meterce a firebase
-* firebase.initiateApp(config) enchufa firebase al js
-* internosRef es la ruta de la tabla donde estoy guardando los trabajadores (ver link)
-* https://console.firebase.google.com/u/0/project/taller-diseno/database/taller-diseno/data
-* la funcion snapshot.foreach recorre los "child" de la tabla y le extraigo los datos
-* con esto deberiamos poder comenzar a conversar con la DB de forma mas fluida
-* notar que "internosFirebase", devuelve exactamente lo mismo que "internos" por consola, demostrando que funciona.
-*/
+var config = {
+    apiKey: "AIzaSyA0nnn3mnnUD8IeLOYV3qwhO2a46jQTHqg",
+    authDomain: "taller-diseno.firebaseapp.com",
+    databaseURL: "https://taller-diseno.firebaseio.com",
+    projectId: "taller-diseno",
+    storageBucket: "taller-diseno.appspot.com",
+    messagingSenderId: "629295465332"
+};
 
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
 
 function revisarDigito( dvr )
 {	
@@ -122,19 +124,6 @@ function Rut(texto)
 
 	return false;
 }
-
-
-
-
-var config = {
-	apiKey: "AIzaSyA0nnn3mnnUD8IeLOYV3qwhO2a46jQTHqg",
-	authDomain: "taller-diseno.firebaseapp.com",
-	databaseURL: "https://taller-diseno.firebaseio.com",
-	projectId: "taller-diseno",
-	storageBucket: "taller-diseno.appspot.com",
-	messagingSenderId: "629295465332"
-};
-firebase.initializeApp(config);
 
 var rootRef 		= firebase.database().ref();
 var internosRef 	= rootRef.child("Trabajadores/Internos");

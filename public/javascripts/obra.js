@@ -7,7 +7,9 @@ const config = {
     messagingSenderId: "629295465332"
 };
 
-firebase.initializeApp(config); 
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
 
 var rootRef = firebase.database().ref();
 var dbObras = rootRef.child("Obras/");
