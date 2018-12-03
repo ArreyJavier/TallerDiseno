@@ -15,6 +15,16 @@ var rootRef = firebase.database().ref();
 var dbObras = rootRef.child("Obras/");
 var obras = [];
 
+var dbClientes = rootRef.child("Clientes/");
+dbClientes.once('value').then(function(snapshot) {
+    snapshot.forEach(function (clienteSnapshot) {
+        var clientList = document.getElementById("cliente-input");
+        var option = document.createElement("option");
+        option.text = clienteSnapshot.val().nombre;
+        clientList.add(option);
+    });
+});
+
 dbObras.once('value').then(function(snapshot) {
     snapshot.forEach(function(obraSnapshot) {
 

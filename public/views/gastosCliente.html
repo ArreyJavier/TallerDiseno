@@ -12,9 +12,11 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="control-label" >Nuevo Gasto</label>
-                    <input type="text" id="obraGasto" name="obraGasto"  value="" placeholder="Obra" class="form-control">
                     <input type="text" id="descripcionGasto" name="descripcionGasto"  value="" placeholder="Descripción" class="form-control">
                     <input type="text" id="montoGasto" name="montoGasto"  value="" placeholder="Monto" class="form-control">
+                    <h5>Obra:
+                        <select id = "obraGasto"></select>
+                    </h5>
                     <button onclick="addGasto()" class="btn-primary btn btn-xs">Crear</button>
                     <div id="created_successfully">
                     </div>
