@@ -37,8 +37,8 @@ document.getElementById("concept_filter").addEventListener('keyup', function(){
 
 function saveEgresos(){
     db.ref('/egresos').set(egresos)
-    .then(success => alert("Successfully saved"))
-    .catch(error => alert(error));
+    .then()
+    .catch(error => console.log(error));
 }
 
 function addEgreso(){
