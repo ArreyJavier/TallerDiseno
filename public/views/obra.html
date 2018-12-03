@@ -21,7 +21,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="product_name">Crear obra</label>
-                        <input type="text" id="obra-input" name="obra-input"  value="" placeholder="Obra" class="form-control">
+                        <input type="text" id="obra-input" name="obra-input"  value="" placeholder="Nombre" class="form-control">
                         <input type="text" id="descripcion-input" name="descripcion-input"  value="" placeholder="Descripcion" class="form-control">
                         <input type="date" id="fechaIni-input" name="fechaIni-input"  value="" placeholder="fechaIni" class="form-control">
                         <input type="date" id="fechaFin-input" name="fechaFin-input"  value="" placeholder="fechaFin" class="form-control">
@@ -40,19 +40,28 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-content">
-                <label class="control-label" for="show_product_name">Obras</label>
+                <label class="control-label">Obras</label>
                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
-                        <thead id="obras">
+                        <thead>
+                        <tr>
+                            <th>Nombre
+                            <th>Descripción
+                            <th>Cliente
+                            <th>Fecha Inicio
+                            <th>Fecha Término
+                            <th class="text-right">Acción
 
-                            </thead>
-                            <tfoot>
+                        <tbody id="obras">
+
+                            </tbody>
+                        <tfoot>
                                 <tr>
                                     <td colspan="6 ">
                                             <div id="updated_successfully">
 
                                                 </div>
                                         <ul class="pagination pull-right"></ul>
-                            </tfoot>
+                        </tfoot>
                     </table>
                 </div>
             </div>
