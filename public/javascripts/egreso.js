@@ -1,19 +1,20 @@
 var egresos = [];
+var db;
 var script = document.createElement('script');
 script.src = "https://www.gstatic.com/firebasejs/5.5.7/firebase.js";
 script.onload = function () {
     // Initialize Firebase
     var config = {
-        apiKey: "AIzaSyDRdTwk5zDbMWIk3W3SqbkG87FK1pnnabo",
-        authDomain: "taller-de-diseno.firebaseapp.com",
-        databaseURL: "https://taller-de-diseno.firebaseio.com",
-        projectId: "taller-de-diseno",
-        storageBucket: "taller-de-diseno.appspot.com",
-        messagingSenderId: "414101844708"
+        apiKey: "AIzaSyA0nnn3mnnUD8IeLOYV3qwhO2a46jQTHqg",
+        authDomain: "taller-diseno.firebaseapp.com",
+        databaseURL: "https://taller-diseno.firebaseio.com",
+        projectId: "taller-diseno",
+        storageBucket: "taller-diseno.appspot.com",
+        messagingSenderId: "629295465332"
     };
     firebase.initializeApp(config);
 
-    var db = firebase.database();
+    db = firebase.database();
     db.ref('/egresos').once('value').then(snapshot => {
         egresos = snapshot.val();
         renderEgresos(egresos);
@@ -21,8 +22,24 @@ script.onload = function () {
 };
 document.head.appendChild(script);
 
+function filterByConcept(egresos){
+    filter = document.getElementById("concept_filter");
+    filterKey = filter.value;
+    filteredEgresos = egresos.filter(egreso => egreso.concepto.toLowerCase().includes(filterKey.toLowerCase()));
+    renderEgresos(filteredEgresos);
+}
+document.getElementById("concept_filter").addEventListener('change', function(){
+    filterByConcept(egresos)
+});
+document.getElementById("concept_filter").addEventListener('keyup', function(){
+    filterByConcept(egresos)
+});
+
+
 function saveEgresos(){
-    db.ref('/egresos').set(egresos);
+    db.ref('/egresos').set(egresos)
+    .then(success => alert("Successfully saved"))
+    .catch(error => alert(error));
 }
 
 function addEgreso(){
@@ -42,7 +59,7 @@ function addEgreso(){
 
 function deleteEgreso(index){
     egresos.splice(index, 1);
-    renderEgresos();
+    renderEgresos(egresos);
 }
 
 function appendEgreso(egreso, index){

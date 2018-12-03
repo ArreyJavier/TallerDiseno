@@ -1,79 +1,50 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Ingresos</h2>
-    </div>
-    <div class="col-lg-2"> </div>
-</div>
-<div class="wrapper wrapper-content animated fadeInRight ecommerce">
-    <div class="ibox-content m-b-sm border-bottom">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="control-label" for="product_name">Concepto</label>
-                    <input type="text" id="product_name" name="product_name" value="" placeholder="Buscar por concepto" class="form-control"> </div>
-            </div>
+        <script src="javascripts/ingreso.js" />   
+        <div class="col-lg-10">
+            <h2>Ingresos</h2>
+        </div>
+        <div class="col-lg-2">                        
+            <button onclick="saveIngresos()" class="btn-primary btn btn-md">Guardar</button>    
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
-                        <thead>
-                        <tr>
-                            <th>Ingreso
-                            <th>Concepto
-                            <th class="text-right" data-sort-ignore="true">Acción
-                        <tbody>
-                        <tr>
-                            <td> Ingreso 1
-                            <td> Concepto del ingreso 1
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Ingreso 2
-                            <td> Concepto del ingreso 2
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Ingreso 3
-                            <td> Concepto del ingreso 3
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Ingreso 4
-                            <td> Concepto del ingreso 4
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Ingreso 5
-                            <td> Concepto del ingreso 5
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tr>
-                            <td> Ingreso 6
-                            <td> Concepto del ingreso 6
-                            <td class="text-right">
-                                <div class="btn-group">
-                                    <button class="btn-white btn btn-xs">Editar</button>
-                                </div>
-                        <tfoot>
-                        <tr>
-                            <td colspan="6">
-                                <ul class="pagination pull-right"></ul>
-                    </table>
+    <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+        <div class="ibox-content m-b-sm border-bottom">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label" for="product_name">Concepto</label>
+                        <input type="text" id="concept_filter" name="product_name" placeholder="Buscar por concepto" class="form-control"> </div>
+                </div>
+            </div>
+        </div>
+        <div class="ibox-content m-b-sm border-bottom">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label" for="product_name">Crear ingreso</label>
+                        <input type="text" id="ingreso-input" name="product_name" value="" placeholder="Ingreso" class="form-control">
+                        <input type="text" id="concepto-input" name="product_name" value="" placeholder="Concepto" class="form-control">
+                        <button onclick="addIngreso()" class="btn-primary btn btn-xs">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                            <thead id="ingresos">
+
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    <ul class="pagination pull-right"></ul>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
