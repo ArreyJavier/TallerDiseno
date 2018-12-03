@@ -22,6 +22,11 @@
             data: {
             pageTitle: 'dashboard '}
          })
+         .state('index.revisar_liquidaciones', {
+            url: "/revisar",
+            templateUrl: "/views/revisar_liquidaciones.html",
+            data: { pageTitle: 'Revisar' }
+        })
          .state('index', {
              abstract: true,
              url: "/index",
@@ -57,6 +62,11 @@
              templateUrl: "/views/gastosCliente.html",
              data: { pageTitle: 'Gastos del Cliente' }
          })
+         .state('index.liquidacion_internos', {
+            url: "/liquidacion_internos",
+            templateUrl: "/views/liquidacion_internos.html",
+            data: { pageTitle: 'Liquidacion Interno' }
+        })
  }
  angular
      .module('inspinia')
