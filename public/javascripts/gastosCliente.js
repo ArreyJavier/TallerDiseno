@@ -17,6 +17,19 @@ var dbClientes = rootRef.child("Clientes/"+clientID);
 
 var gastos = [];
 
+var dbObras = rootRef.child("Obras/");
+dbClientes.once('value').then(function (clientesSnapshot) {
+    dbObras.once('value').then(function(snapshot) {
+        snapshot.forEach(function (obrasSnapshot) {
+            if(obrasSnapshot.val().cliente == clientesSnapshot.val().nombre) {
+                var obraList = document.getElementById("obraGasto");
+                var optionObra = document.createElement("option");
+                optionObra.text = obrasSnapshot.val().obra;
+                obraList.add(optionObra);
+            }
+        });
+    });
+});
 
 dbClientes.once("value").then(function(snapshotClient){
     document.getElementById("title").innerHTML = snapshotClient.val().nombre;
@@ -25,10 +38,8 @@ dbClientes.once("value").then(function(snapshotClient){
     var dbObras = rootRef.child("Obras/");
     dbObras.once("value").then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
-
-            if(childSnapshot.val().cliente == snapshotClient.val().key){
+            if(childSnapshot.val().cliente == snapshotClient.val().nombre){
                 childSnapshot.child("/gastos").forEach(function (superChildSnapshot) {
-
                     tmpGastos 				= {};
                     tmpGastos['obra'] 	    = childSnapshot.val().obra;
                     tmpGastos['descripcion'] = superChildSnapshot.val().descripcion;
