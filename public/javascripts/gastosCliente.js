@@ -52,6 +52,19 @@ dbClientes.once("value").then(function(snapshotClient){
     });
 });
 
+function filterByObra(gastos){
+    filter = document.getElementById("filter-obra");
+    filterKey = filter.value;
+    filteredGastos = gastos.filter(gasto => gasto.obra.toLowerCase().includes(filterKey.toLowerCase()));
+    renderGastos2(filteredGastos);
+}
+document.getElementById("filter-obra").addEventListener('change', function(){
+    filterByObra(gastos)
+});
+document.getElementById("filter-obra").addEventListener('keyup', function(){
+    filterByObra(gastos)
+});
+
 function addGasto(){
 
     var rootRef = firebase.database().ref();
@@ -117,8 +130,19 @@ function appendGasto(gasto, index){
 }
 
 function renderGastos(){
+    var total = 0;
     document.getElementById('gastos').innerHTML = '';
     gastos.forEach((gasto, i) => appendGasto(gasto, i));
+    gastos.forEach((gasto) => total += parseInt(gasto.monto));
+    document.getElementById("totalMonto").innerHTML = total;
+}
+
+function renderGastos2(gastos){
+    var total = 0;
+    document.getElementById('gastos').innerHTML = '';
+    gastos.forEach((gasto, i) => appendGasto(gasto, i));
+    gastos.forEach((gasto) => total += parseInt(gasto.monto));
+    document.getElementById("totalMonto").innerHTML = total;
 }
 
 renderGastos();
