@@ -1,4 +1,5 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
+    <script src="javascripts/index.js"></script>
     <div class="sidebar-collapse">
         <ul side-navigation class="nav metismenu" id="side-menu">
             <li class="nav-header">
@@ -7,13 +8,13 @@
                     <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">{{main.userName}}</strong>
+                                    <strong class="font-bold" id ="userName"></strong>
                              </span>
-                                <span class="text-muted text-xs block">Example menu<b class="caret"></b></span>
+                                <span class="text-muted text-xs block">Menu<b class="caret"></b></span>
                             </span>
                     </a>
                     <ul uib-dropdown-menu="" class="animated fadeInRight m-t-xs">
-                        <li><a href="">Logout</a></li>
+                        <li><a id="signOut">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
