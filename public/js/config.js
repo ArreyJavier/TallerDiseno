@@ -22,6 +22,11 @@
             data: {
             pageTitle: 'dashboard '}
          })
+         .state('index.revisarLiquidaciones', {
+            url: "/revisarLiquidaciones",
+            templateUrl: "/views/revisarLiquidaciones.html",
+            data: { pageTitle: 'Revisar' }
+        })
          .state('index', {
              abstract: true,
              url: "/index",
@@ -72,6 +77,11 @@
              templateUrl: "/views/gastosCliente.html",
              data: { pageTitle: 'Gastos del Cliente' }
          })
+         .state('index.liquidacionMTrabajadores', {
+            url: "/liquidacionMTrabajadores",
+            templateUrl: "/views/liquidacionMTrabajadores.html",
+            data: { pageTitle: 'Liquidacion Mano de Obras' }
+        })
  }
  angular
      .module('inspinia')
