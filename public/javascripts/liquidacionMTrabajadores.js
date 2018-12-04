@@ -44,7 +44,7 @@ function appendGasto(gasto, index){
                         <tr id="gasto${index}">
                             <td> ${gasto.gasto} </td>
                             <td> ${gasto.fecha} </td>
-                            <td> ${gasto.nombre} </td>
+                            <td> ${gasto.manoDeObra} </td>
                             <td> ${gasto.tipo} </td>
                             <td class="text-right">
                                 <div class="btn-group">
