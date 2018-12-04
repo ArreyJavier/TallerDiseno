@@ -44,7 +44,7 @@ gastosRef.once('value').then(function(snapshot) {
 
 		gastos.push(tmpGasto);
 	});
-	renderInternos();
+	renderGastos();
 });
 
 function getManoDeObra(){
@@ -98,20 +98,18 @@ function addGasto(){
 		setTimeout(fade_out, 5000);
 
 	}
-	renderInternos();
+	renderGastos();
 }
 
-function deleteInterno(index){
-	var result = confirm("¿Desea borrar este trabajador?");
+function deleteGasto(index){
+	var result = confirm("¿Desea borrar este gasto?");
 	if (result) {
-		console.log(internos[index]['key']);
-		console.log(internos[index]['cedula']);
-		deleteRef = internosRef.child(internos[index]['key'])
+		deleteRef = gastosRef.child(gastos[index]['key'])
 
 		deleteRef.remove();
-		internos.splice(index, 1);
+		gastos.splice(index, 1);
 	}
-	renderInternos();
+	renderGastos();
 }
 
 
@@ -123,68 +121,19 @@ function appendGasto(gasto, index){
 							<td> ${gasto.tipo} </td>
 							<td class="text-right">
 								<div class="btn-group">
-									<button onclick="initEditInterno(${index})" class="btn-white btn btn-xs">Editar</button>
-									<button onclick="deleteInterno(${index})" class="btn-danger btn btn-xs">Delete</button>
+									<button onclick="deleteGasto(${index})" class="btn-danger btn btn-xs">Delete</button>
 								</div>
 							</td>
 						</tr>`;
 }
 
-function initEditInterno(index){
-	document.getElementById(`interno${index}`).innerHTML = `
-						<tr id="interno${index}">
-						<td><input type="text" id="interno-field" value="${internos[index].nombre}" class="form-control"></td>
-						<td><input type="text" id="cedula-field" value="${internos[index].cedula}" class="form-control"></td>
-							<td class="text-right">
-								<div class="btn-group">
-									<button onclick="executeEditInterno(${index})" class="btn-primary btn btn-xs">Guardar</button>
-								</div>
-							</td>
-						</tr>`;
 
-}
-function executeEditInterno(index){
-	interno = {
-		"nombre" 	: document.getElementById("interno-field").value,
-		"cedula" 	: document.getElementById("cedula-field").value
-	};
-
-	if ((interno.nombre == "") || (interno.cedula == "")) {
-		alert("Todos los campos deben ser rellenados.");
-		return false;
-	}
-	else {
-		internos[index] = {
-			"key" 		: internos[index].key,
-			"nombre" 	: document.getElementById("interno-field").value,
-			"cedula" 	: document.getElementById("cedula-field").value
-		};
-
-		internosRef.child(internos[index].key).update({
-			'key' 		: internos[index].key,
-			'nombre' 	: interno.nombre,
-			'cedula' 	: interno.cedula
-		});
-		document.getElementById('updated_successfully').innerHTML += `
-		<div class="alert alert-success" role="alert">
-			Actualización exitosa de los datos.
-		</div>
-		`;
-		var fade_out = function() {
-		$("#updated_successfully").fadeOut().empty();
-		};
-		setTimeout(fade_out, 5000); 
-
-	}
-	renderInternos();
-}
-
-function renderInternos(){
+function renderGastos(){
 	document.getElementById('gastos').innerHTML = '';
 	gastos.forEach((gasto, i) => appendGasto(gasto, i));
 }
 
-renderInternos();
+renderGastos();
 
 
 
