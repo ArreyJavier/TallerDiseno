@@ -41,6 +41,8 @@ gastosRef.once('value').then(function(snapshot) {
 		tmpGasto['gasto'] 		= gastoExterno.gasto;
 		tmpGasto['tipo'] 		= gastoExterno.tipo;
 		tmpGasto['manoDeObra'] 	= gastoExterno.manoDeObra;
+		tmpGasto['fecha'] 	    = gastoExterno.fecha;
+		tmpGasto['desc'] 	    = gastoExterno.desc;
 
 		gastos.push(tmpGasto);
 	});
@@ -60,11 +62,18 @@ function addGasto(){
 	gasto = {
 		"gasto":		"",
 		"tipo":			"",
-		"manoDeObra":	""
+		"manoDeObra":	"",
+		"fecha":		"",
+		"desc":		""
+
 	};
 	gasto.gasto			= document.getElementById("gasto-input").value;
 	gasto.tipo			= document.getElementById("tipo-gasto-select").value;
 	gasto.manoDeObra	= document.getElementById("mano-de-obra-select").value;
+	gasto.fecha			= document.getElementById("fecha-input").value;
+	gasto.desc			= document.getElementById("desc-input").value;
+
+
 
 
 	if ( gasto.gasto == "" )  {
@@ -80,7 +89,11 @@ function addGasto(){
 			'key'			: newGastoKey,
 			'gasto'			: gasto.gasto,
 			'tipo'			: gasto.tipo,
-			'manoDeObra'	: gasto.manoDeObra
+			'manoDeObra'	: gasto.manoDeObra,
+			'fecha'			: gasto.fecha,
+			'desc'			: gasto.desc
+
+
 		};
 		gastosRef.child(newGastoKey).update(newGasto);
 		gasto.key = newGastoKey;
@@ -119,6 +132,8 @@ function appendGasto(gasto, index){
 							<td> ${gasto.manoDeObra} </td>
 							<td> ${gasto.gasto} </td>
 							<td> ${gasto.tipo} </td>
+							<td> ${gasto.fecha} </td>
+							<td> ${gasto.desc} </td>
 							<td class="text-right">
 								<div class="btn-group">
 									<button onclick="deleteGasto(${index})" class="btn-danger btn btn-xs">Delete</button>
