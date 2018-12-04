@@ -58,6 +58,8 @@ dbUsuarios.on("child_added", function(snapshot){
 });
 
 function deleteUsuario(index){
+  var result = confirm("Quieres borrar?");
+  if (result) {
     deleteApp.auth().signInWithEmailAndPassword(usuarios[index].correo,usuarios[index].contraseña).then(function(value) {
       var user = deleteApp.auth().currentUser;
       var dbUsuarios = firebase.database().ref("Usuarios/"+user.uid);
@@ -67,6 +69,7 @@ function deleteUsuario(index){
     deleteApp.auth().signOut();
     usuarios.splice(index, 1);
     renderUsuarios();
+  }
 }
 
 function appendUsuario(usuario, index){
