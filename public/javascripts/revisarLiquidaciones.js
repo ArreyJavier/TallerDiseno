@@ -17,7 +17,6 @@ var mTrabajadores 		= [];
 
 mTrabajadorRef.once('value').then(function(snapshot) {
 	snapshot.forEach(function(mTrabajadorSnapshot) {
-
 		var mTrabajador 	= mTrabajadorSnapshot.val();
 		tmpmTrabajador 				= {};
 		tmpmTrabajador['key'] 		= mTrabajador.key;
@@ -75,7 +74,3 @@ function renderMTrabajadores(mTrabajadores){
 }
 
 renderMTrabajadores(mTrabajadores);
-
-
-
-
