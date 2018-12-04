@@ -41,6 +41,7 @@ dbClientes.once("value").then(function(snapshotClient){
             if(childSnapshot.val().cliente == snapshotClient.val().nombre){
                 childSnapshot.child("/gastos").forEach(function (superChildSnapshot) {
                     tmpGastos 				= {};
+                    tmpGastos['key'] 		= superChildSnapshot.key;
                     tmpGastos['obra'] 	    = childSnapshot.val().obra;
                     tmpGastos['descripcion'] = superChildSnapshot.val().descripcion;
                     tmpGastos['monto'] 	= superChildSnapshot.val().monto;
@@ -126,7 +127,38 @@ function appendGasto(gasto, index){
                             <td> ${gasto.obra} </td>
                             <td> ${gasto.descripcion} </td>
                             <td> ${gasto.monto} </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button onclick="deleteGasto(${index})" class="btn-danger btn btn-xs">Delete</button>
+                                </div>
+                            </td>
                         </tr>`;
+}
+
+function deleteGasto(index) {
+    var result = confirm("Quieres borrar?");
+    if (result) {
+        var stopDelete = 0;
+        //Logic to delete the item
+        var dbObras = rootRef.child("Obras/");
+        dbObras.once('value').then(function (snapshot) {
+            snapshot.forEach(function (obrasSnapshot) {
+                obrasSnapshot.child("/gastos").forEach(function (gastosSnapshot) {
+                    if(gastosSnapshot.key == gastos[index].key && stopDelete == 0){
+                            var adaRef = firebase.database().ref('Obras/'+ obrasSnapshot.key +"/gastos/"+gastos[index].key);
+                            gastos.splice(index, 1);
+                            stopDelete = 1;
+                            adaRef.remove().then(function() {
+                                console.log("Exito borrar.");
+                                renderGastos();
+                            }).catch(function(error) {
+                                console.log("No podría borrar: " + error.message);
+                            });
+                    }
+                });
+            });
+        });
+    }
 }
 
 function renderGastos(){
