@@ -37,10 +37,10 @@
              templateUrl: "/views/internoMantencion.html",
              data: { pageTitle: 'Interno Mantencion' }
          })
-         .state('index.manoDeObraMantencion', {
-             url: "/manoDeObraMantencion",
-             templateUrl: "/views/manoDeObraMantencion.html",
-             data: { pageTitle: 'Mano De Obra Mantencion' }
+         .state('index.externoMantencion', {
+             url: "/externoMantencion",
+             templateUrl: "/views/externoMantencion.html",
+             data: { pageTitle: 'Externo Mantencion' }
          })
          .state('index.ingresarGastos', {
              url: "/ingresarGastos",
