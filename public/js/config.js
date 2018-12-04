@@ -22,9 +22,9 @@
             data: {
             pageTitle: 'dashboard '}
          })
-         .state('index.revisar_liquidaciones', {
-            url: "/revisar",
-            templateUrl: "/views/revisar_liquidaciones.html",
+         .state('index.revisarLiquidaciones', {
+            url: "/revisarLiquidaciones",
+            templateUrl: "/views/revisarLiquidaciones.html",
             data: { pageTitle: 'Revisar' }
         })
          .state('index', {
@@ -62,10 +62,10 @@
              templateUrl: "/views/gastosCliente.html",
              data: { pageTitle: 'Gastos del Cliente' }
          })
-         .state('index.liquidacion_internos', {
-            url: "/liquidacion_internos",
-            templateUrl: "/views/liquidacion_internos.html",
-            data: { pageTitle: 'Liquidacion Interno' }
+         .state('index.liquidacionMTrabajadores', {
+            url: "/liquidacionMTrabajadores",
+            templateUrl: "/views/liquidacionMTrabajadores.html",
+            data: { pageTitle: 'Liquidacion Mano de Obras' }
         })
  }
  angular

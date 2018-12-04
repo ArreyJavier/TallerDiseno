@@ -1,29 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <script src="javascripts/liquidacion_internos.js" />
+        <script src="javascripts/liquidacionMTrabajadores.js" />
         <h2 id="title"></h2>
-        <button ui-sref="index.cliente" class="btn-white btn btn-xs">Volver</button>
+        <button ui-sref="index.revisarLiquidaciones" class="btn-white btn btn-xs">Volver</button>
     </div>
     <div class="col-lg-2"> </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-    <div class="ibox-content m-b-sm border-bottom">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="control-label" >Nuevo Gasto</label>
-                    <input type="text" id="descripcionGasto" name="descripcionGasto"  value="" placeholder="Descripción" class="form-control">
-                    <input type="text" id="montoGasto" name="montoGasto"  value="" placeholder="Monto" class="form-control">
-                    <h5>Obra:
-                        <select id = "obraGasto"></select>
-                    </h5>
-                    <button onclick="addGasto()" class="btn-primary btn btn-xs">Crear</button>
-                    <div id="created_successfully">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
@@ -34,7 +17,7 @@
 
                         </thead>
                         <tfoot>
-                        <tr>
+                        
                             <td colspan="6 ">
                                 <div id="updated_successfully">
 
