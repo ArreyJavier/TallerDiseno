@@ -24,7 +24,7 @@ dbMTrabajadores.once("value").then(function(snapshotTrabajador){
     var dbTrabajadoresGastos = rootRef.child("Trabajadores/Gastos/");
     dbTrabajadoresGastos.once("value").then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
-            if((childSnapshot.val().manoDeObra == snapshotTrabajador.val().nombre) && childSnapshot.val().tipo == "Liquidación"){
+            if(childSnapshot.val().manoDeObra == snapshotTrabajador.val().nombre){
                     tmpGastos 				= {};
                     tmpGastos['gasto'] 	    = childSnapshot.val().gasto;
                     tmpGastos['key'] = childSnapshot.val().key;
@@ -42,9 +42,9 @@ dbMTrabajadores.once("value").then(function(snapshotTrabajador){
 function appendGasto(gasto, index){
     document.getElementById('gastos').innerHTML += `
                         <tr id="gasto${index}">
+                            <td> ${gasto.manoDeObra} </td>
                             <td> ${gasto.gasto} </td>
                             <td> ${gasto.fecha} </td>
-                            <td> ${gasto.manoDeObra} </td>
                             <td> ${gasto.tipo} </td>
                             <td class="text-right">
                                 <div class="btn-group">
@@ -73,8 +73,21 @@ function showInfo(index){
 
 
 function renderGastos(){
+    var total = 0;
     document.getElementById('gastos').innerHTML = '';
     gastos.forEach((gasto, i) => appendGasto(gasto, i));
+    gastos.forEach(function(valor, indice, array) {
+        if(valor.tipo == "Sueldo Base"){
+            total += valor.gasto;
+        }
+        if(valor.tipo == "Imposición"){
+            total -= valor.gasto;
+        }
+        if(valor.tipo == "Anticipo"){
+            total -= valor.gasto;
+        }
+    });
+    document.getElementById("liquidacionTotal").innerHTML = total;
 }
 
 
