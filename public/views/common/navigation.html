@@ -1,4 +1,5 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
+    <script src="javascripts/index.js"></script>
     <div class="sidebar-collapse">
         <ul side-navigation class="nav metismenu" id="side-menu">
             <li class="nav-header">
@@ -7,13 +8,13 @@
                     <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">{{main.userName}}</strong>
+                                    <strong class="font-bold" id ="userName"></strong>
                              </span>
-                                <span class="text-muted text-xs block">Example menu<b class="caret"></b></span>
+                                <span class="text-muted text-xs block">Menu<b class="caret"></b></span>
                             </span>
                     </a>
                     <ul uib-dropdown-menu="" class="animated fadeInRight m-t-xs">
-                        <li><a href="">Logout</a></li>
+                        <li><a id="signOut">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -27,14 +28,14 @@
                 <ul class="nav nav-second-level">
                   <li> <a ui-sref="index.dashboard">Interno <span class="fa arrow"></span></a>
                       <ul class="nav nav-third-level">
-                          <li> <a ui-sref="index.dashboard">Mantención</a> </li>
+                          <li> <a ui-sref="index.internoMantencion">Mantención</a> </li>
                       </ul>
                   </li>
                   <li> <a ui-sref="index.dashboard">Mano de Obra <span class="fa arrow"></span></a>
                       <ul class="nav nav-third-level">
-                          <li> <a>Mantención</a> </li>
+                          <li> <a ui-sref="index.externoMantencion">Mantención</a> </li>
                           <li> <a ui-sref="index.revisarLiquidaciones">Revisar liquidaciones </a> </li>
-                          <li> <a ui-sref="index.dashboard">Ingresar gastos </a> </li>
+                          <li> <a ui-sref="index.ingresarGastos">Ingresar gastos </a> </li>
                       </ul>
                   </li>
               </ul>

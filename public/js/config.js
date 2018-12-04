@@ -37,6 +37,21 @@
              templateUrl: "/views/main.html",
              data: { pageTitle: 'Inicio' }
          })
+         .state('index.internoMantencion', {
+             url: "/internoMantencion",
+             templateUrl: "/views/internoMantencion.html",
+             data: { pageTitle: 'Interno Mantencion' }
+         })
+         .state('index.externoMantencion', {
+             url: "/externoMantencion",
+             templateUrl: "/views/externoMantencion.html",
+             data: { pageTitle: 'Externo Mantencion' }
+         })
+         .state('index.ingresarGastos', {
+             url: "/ingresarGastos",
+             templateUrl: "/views/ingresarGastos.html",
+             data: { pageTitle: 'Ingresar Gastos' }
+         })
          .state('index.obra', {
              url: "/obra",
              templateUrl: "/views/obra.html",

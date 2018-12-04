@@ -1,0 +1,47 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+		<script src="javascripts/ingresarGastos.js" />
+		<div class="col-lg-10">
+			<h2>Ingresar Gastos</h2>
+		</div>
+		<div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+	<div class="ibox-content m-b-sm border-bottom">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="control-label" for="product_name">Buscar Mano de Obra</label>
+					<select class="form-control" id="mano-de-obra-select"></select>
+					<input type="text" id="gasto-input" name="product_name" value="" placeholder="Monto (Ej: $400.000)" class="form-control">
+					<select class="form-control" id="tipo-gasto-select">
+						<option>Anticipo</option>
+						<option>Imposición</option>
+						<option>Liquidación</option>
+					</select>
+					<button onclick="addGasto()" class="btn-primary btn btn-xs">Crear</button>
+					<div id="created_successfully"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div class="ibox-content">
+					<label class="control-label" for="show_product_name">Gastos</label>
+						<table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+							<thead id="gastos">
+
+							</thead>
+							<tfoot>
+								<tr>
+								<td colspan="6">
+									<div id="updated_successfully"></div>
+									<ul class="pagination pull-right"></ul>
+							</tfoot>
+						</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

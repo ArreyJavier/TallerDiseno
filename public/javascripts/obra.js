@@ -42,6 +42,20 @@ dbObras.once('value').then(function(snapshot) {
     renderObras();
 });
 
+function filterByClient(obras){
+    filter = document.getElementById("oClient");
+    filterKey = filter.value;
+    filteredObras = obras.filter(obra => obra.cliente.toLowerCase().includes(filterKey.toLowerCase()));
+    renderObras2(filteredObras);
+}
+document.getElementById("oClient").addEventListener('change', function(){
+    filterByClient(obras)
+});
+document.getElementById("oClient").addEventListener('keyup', function(){
+    filterByClient(obras)
+});
+
+
 function addObra(){
     obra = {
         "obra": "",
@@ -199,6 +213,11 @@ function executeEditObra(index){
 }
 
 function renderObras(){
+    document.getElementById('obras').innerHTML = '';
+    obras.forEach((obra, i) => appendObra(obra, i));
+}
+
+function renderObras2(obras){
     document.getElementById('obras').innerHTML = '';
     obras.forEach((obra, i) => appendObra(obra, i));
 }

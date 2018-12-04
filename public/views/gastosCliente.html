@@ -9,6 +9,16 @@
 <div class="wrapper wrapper-content animated fadeInRight ecommerce">
     <div class="ibox-content m-b-sm border-bottom">
         <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label class="control-label" for="oClient">Cliente</label>
+                    <input type="text" id="filter-obra" name="filter-obra" placeholder="Buscar por obra" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="control-label" >Nuevo Gasto</label>
@@ -28,13 +38,22 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-content">
-                    <label class="control-label" for="show_product_name">Gastos</label>
+                    <label class="control-label">Gastos</label>
                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
-                        <thead id="gastos">
+                        <thead>
+                        <tr>
+                            <th>Obra
+                            <th>Descripción
+                            <th>Monto
 
-                        </thead>
+                        <tbody id="gastos">
+
+                        </tbody>
                         <tfoot>
                         <tr>
+                            <td style="font-weight: bold">Total</td>
+                            <td></td>
+                            <td style="font-weight: bold" id="totalMonto"></td>
                             <td colspan="6 ">
                                 <div id="updated_successfully">
 

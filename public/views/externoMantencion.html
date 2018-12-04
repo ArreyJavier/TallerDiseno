@@ -1,0 +1,42 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+		<script src="javascripts/externoMantencion.js" />
+		<div class="col-lg-10">
+			<h2>Mantención de Mano de Obra</h2>
+		</div>
+		<div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+	<div class="ibox-content m-b-sm border-bottom">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="control-label" for="product_name">Crear Mano de Obra</label>
+					<input type="text" id="interno-input" name="product_name" value="" placeholder="Nombre del trabajador (Ej: Juan Gomez Mansilla)" class="form-control">
+					<input type="text" id="cedula-input" name="product_name" value="" placeholder="Cédula de identidad (Ej: 11222333-4)" class="form-control">
+					<button onclick="addInterno()" class="btn-primary btn btn-xs">Crear</button>
+					<div id="created_successfully"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div class="ibox-content">
+					<label class="control-label" for="show_product_name">Mano de Obra</label>
+						<table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+							<thead id="internos">
+
+							</thead>
+							<tfoot>
+								<tr>
+								<td colspan="6">
+									<div id="updated_successfully"></div>
+									<ul class="pagination pull-right"></ul>
+							</tfoot>
+						</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

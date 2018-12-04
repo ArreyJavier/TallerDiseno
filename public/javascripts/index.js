@@ -4,3 +4,10 @@ document.getElementById('signOut').addEventListener('click', function(event) {
     window.location.href="/";
   });
 });
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        userName = user.email;
+        document.getElementById("userName").innerHTML = userName;
+    }
+});
