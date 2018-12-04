@@ -14,32 +14,11 @@ if (!firebase.apps.length) {
 var ingresos = [];
 db = firebase.database();
 db.ref('/ingresos').once('value').then(snapshot => {
-    ingresos = snapshot.val();
-    renderingresos(ingresos);
+    if(snapshot.exists()) {
+        ingresos = snapshot.val();
+        renderingresos(ingresos);
+    }
 });
-
-// var db;
-// var script = document.createElement('script');
-// script.src = "https://www.gstatic.com/firebasejs/5.5.7/firebase.js";
-// script.onload = function () {
-//     // Initialize Firebase
-//     var config = {
-//         apiKey: "AIzaSyA0nnn3mnnUD8IeLOYV3qwhO2a46jQTHqg",
-//         authDomain: "taller-diseno.firebaseapp.com",
-//         databaseURL: "https://taller-diseno.firebaseio.com",
-//         projectId: "taller-diseno",
-//         storageBucket: "taller-diseno.appspot.com",
-//         messagingSenderId: "629295465332"
-//     };
-//     firebase.initializeApp(config);
-
-//     db = firebase.database();
-//     db.ref('/ingresos').once('value').then(snapshot => {
-//         ingresos = snapshot.val();
-//         renderingresos(ingresos);
-//     });
-// };
-// document.head.appendChild(script);
 
 function filterByConcept(ingresos){
     filter = document.getElementById("concept_filter");
@@ -112,7 +91,7 @@ function executeEditingreso(index){
     ingresos[index] = {
         "ingreso": document.getElementById("ingreso-field").value,
         "concepto": document.getElementById("concepto-field").value
-    }
+    };
     renderingresos(ingresos);
 }
 

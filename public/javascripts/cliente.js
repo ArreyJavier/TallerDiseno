@@ -57,7 +57,6 @@ function addCliente(){
         dbClientes.child(newClienteKey).update(updates);
         cliente.key = newClienteKey;
         clientes.push(cliente);
-        console.log(clientes);
 
         document.getElementById('created_successfully').innerHTML += `
         <div class="alert alert-success" role="alert">

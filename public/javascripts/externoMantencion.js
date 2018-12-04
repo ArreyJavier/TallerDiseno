@@ -169,7 +169,6 @@ function addInterno(){
 		internosRef.child(newInternoKey).update(newInterno);
 		interno.key = newInternoKey;
 		internos.push(interno);
-		console.log(internos);
 
 		document.getElementById('created_successfully').innerHTML += `
 		<div class="alert alert-success" role="alert">
@@ -188,8 +187,6 @@ function addInterno(){
 function deleteInterno(index){
 	var result = confirm("¿Desea borrar este trabajador?");
 	if (result) {
-		console.log(internos[index]['key']);
-		console.log(internos[index]['cedula']);
 		deleteRef = internosRef.child(internos[index]['key'])
 
 		deleteRef.remove();

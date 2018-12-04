@@ -16,8 +16,10 @@ if (!firebase.apps.length) {
 var egresos = [];
 var db = firebase.database();
 db.ref('/egresos').once('value').then(snapshot => {
-    egresos = snapshot.val();
-    renderEgresos(egresos);
+    if(snapshot.exists()){
+        egresos = snapshot.val();
+        renderEgresos(egresos);
+    }
 });
 
 
@@ -46,8 +48,8 @@ function addEgreso(){
         "egreso": "",
         "concepto": ""
     };
-    egreso.egreso = document.getElementById("egreso-input").value
-    egreso.concepto = document.getElementById("concepto-input").value
+    egreso.egreso = document.getElementById("egreso-input").value;
+    egreso.concepto = document.getElementById("concepto-input").value;
 
     document.getElementById("egreso-input").value = '';
     document.getElementById("concepto-input").value = '';
@@ -101,4 +103,3 @@ function renderEgresos(egresos){
     egresos.forEach((egreso, i) => appendEgreso(egreso, i));
     saveEgresos();
 }
-

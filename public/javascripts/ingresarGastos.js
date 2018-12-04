@@ -98,7 +98,6 @@ function addGasto(){
 		gastosRef.child(newGastoKey).update(newGasto);
 		gasto.key = newGastoKey;
 		gastos.push(gasto);
-		console.log(gastos);
 
 		document.getElementById('created_successfully').innerHTML += `
 		<div class="alert alert-success" role="alert">
